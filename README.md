@@ -73,9 +73,6 @@ public class LongestCommonPrefix_14 {
 </pre>
 解法三：分治  
 --
-思路：
---
-    ![avatar](https://pic.leetcode-cn.com/8bb79902c99719a923d835b9265b2dea6f20fe7f067f313cddcf9dd2a8124c94-file_1555694229984)  
 代码： 
 --
 <pre>
@@ -84,7 +81,39 @@ public class LongestCommonPrefix_14 {
  * @date 2019/10/11 21:59
  * @descriptor  14. 最长公共前缀
  */
- 
- 
+ public class LongestCommonPrefix_14 {
+  public static String longestCommonPrefix5(String[]strs){
+        if(strs == null || strs.length == 0)
+            return "";
+       return longestCommonPrefix(strs,0,strs.length-1);
+    }
+
+    public static String longestCommonPrefix(String[]strs,int l,int r){
+        if(l == r)
+            return strs[l];
+        else{
+            int mid  = (l + r) / 2;
+            String left = longestCommonPrefix(strs,l,mid);
+            String right = longestCommonPrefix(strs,mid+1,r);
+            return commonPrefix(left,right);
+        }
+    }
+
+    public static String commonPrefix(String left,String right){
+        int len = Math.min(left.length(),right.length());
+        for (int i = 0; i < len; i++) {
+            if(left.charAt(i) != right.charAt(i))
+                return left.substring(0,i);
+        }
+        return left.substring(0,len);
+    }
+     public static void main(String[] args) {
+       // String strings[] = {"flowler","flow","flight"};
+        String strings[] = {"flowa","flow"};
+        String s = longestCommonPrefix(strings);
+        System.out.println(s);
+    }
+}
+</pre>
  
 原地址：https://leetcode-cn.com/problems/longest-common-prefix/solution/zui-chang-gong-gong-qian-zhui-by-leetcode/  

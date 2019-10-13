@@ -1,6 +1,5 @@
 3、leetcode14. 最长公共前缀
 ==
-https://leetcode-cn.com/problems/longest-common-prefix/solution/zui-chang-gong-gong-qian-zhui-by-leetcode/  
 解法一：水平扫描  
 --
 思路：
@@ -49,3 +48,4 @@ public class LongestCommonPrefix_14 {
     }
 }
 </pre>
+原地址：https://leetcode-cn.com/problems/longest-common-prefix/solution/zui-chang-gong-gong-qian-zhui-by-leetcode/  

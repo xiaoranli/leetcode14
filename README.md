@@ -115,5 +115,68 @@ public class LongestCommonPrefix_14 {
     }
 }
 </pre>
- 
+ 解法四：KMP  
+--  
+代码： 
+--
+<pre>
+/**
+ * @author lihe
+ * @date 2019/10/13 8:44
+ * @descriptor  28. 实现 strStr()
+ */
+public class StrStr_28 {
+    public static int strStr(String haystack,String needle){
+        if (needle.equals("")) {
+            return 0;
+        }
+        char[] hChars = haystack.toCharArray();
+        char[] nChars = needle.toCharArray();
+        int i = 0;
+        int j = 0;
+        int[] next = getNext(nChars);
+        while(i < hChars.length && j < nChars.length){
+            if(hChars[i] == nChars[j]){
+                i++;
+                j++;
+            }else if(next[j] == -1)
+                i++;
+            else{
+                j = next[j];
+            }
+        }
+        return j == nChars.length ? i - j : -1;
+    }
+
+    private static int[] getNext(char[] str2) {
+        if (str2.length == 1) {
+            return new int[] { -1 };
+        }
+        int[] next = new int[str2.length];
+        next[0] = -1;//默认
+        next[1] = 0;//默认
+        int i = 2;//要求的最大相同前后缀 的 每一个位置,第i个位置
+        int cn = 0;//跳到的位置,前缀的下一个字符
+        while (i < next.length) {
+            //i前一个字符与跳到的字符相同，长度为++cn的值
+            if (str2[i - 1] == str2[cn]) {
+                next[i++] = ++cn;
+                //i前一个字符与跳到的字符不等，cn继续向前跳到next[cn]
+            } else if (cn > 0) {
+                cn = next[cn];
+            } else {
+                next[i++] = 0;
+            }
+        }
+        return next;
+    }
+
+    public static void main(String[] args) {
+        //int i = strStr("hello", "ll");
+        //int i = strStr("hello", "ll");
+        int i = strStr("", "a");
+        System.out.println(i);
+    }
+}
+</pre>
 原地址：https://leetcode-cn.com/problems/longest-common-prefix/solution/zui-chang-gong-gong-qian-zhui-by-leetcode/  
